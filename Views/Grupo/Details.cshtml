@@ -1,0 +1,168 @@
+﻿@model GrupoClientes.ViewsModel.GrupoViewModel
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Detalhes</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                    <li class="breadcrumb-item active">Detalhes</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" style="margin:16px;">
+    <div class="card card-navy">
+        <div class="card-header">
+            <h3 class="card-title">Grupo</h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Descricao)</td>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!--LISTAGEM DE MENUS E USUÁRIOS DO GRUPO-->
+<section class="content" style="margin:16px;">
+    <div class="row">
+        @if (Model.Menus.Count > 0)
+        {
+            <div class="col-6"><!--O 6 PERMITI CRIAR UMA TABELA SOMENTE EM UM LADO DA PÁGINA-->
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Menus desse Grupo</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="tab1"  name="table_search" class="form-control float-right" placeholder="Procurar">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Url</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Menus)
+                                {
+                                    <tr>
+                                        <td class="table-filter-item1">@item.Descricao</td>
+                                        <td>@item.Url</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Usuarios.Count > 0)
+        {
+            <div class="col-6">
+                <div class="card card-lightblue">
+                    <div class="card-header">
+                        <h3 class="card-title">Lista de Usuários desse Grupo</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="tab2" name="table_search" class="form-control float-right" placeholder="Procurar">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Usuarios)
+                                {
+                                    <tr>
+                                        <td class="table-filter-item2">@item.Nome</td>
+                                        <td>@item.Email</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<div class="content" style="margin:16px;">
+    <a asp-action="Index" class="btn btn-info">Voltar a página anterior</a>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableSearchInput = document.getElementById('tab1');
+        var tableFilterItems = document.getElementsByClassName('table-filter-item1');
+
+        tableSearchInput.addEventListener('input', function () {
+            var searchText = tableSearchInput.value.toLowerCase();
+
+            Array.prototype.forEach.call(tableFilterItems, function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var row = item.parentNode;
+                row.style.display = itemText.includes(searchText) ? '' : 'none';
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableSearchInput = document.getElementById('tab2');
+        var tableFilterItems = document.getElementsByClassName('table-filter-item2');
+
+        tableSearchInput.addEventListener('input', function () {
+            var searchText = tableSearchInput.value.toLowerCase();
+
+            Array.prototype.forEach.call(tableFilterItems, function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var row = item.parentNode;
+                row.style.display = itemText.includes(searchText) ? '' : 'none';
+            });
+        });
+    });
+</script>

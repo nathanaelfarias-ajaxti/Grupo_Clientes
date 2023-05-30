@@ -1,0 +1,154 @@
+﻿@model GrupoClientes.ViewsModel.MenuViewModel
+
+<!--CABEÇALHO-->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Deletar</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                    <li class="breadcrumb-item active">Deletar</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" style="margin:16px;">
+    <div class="card card-navy">
+        <div class="card-header">
+            <h3 class="card-title">Menu</h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Url</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Descricao)</td>
+                        <td>@Html.DisplayFor(model => model.Url)</td>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="content" style="margin:16px;">
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <div>
+            <a onclick="deletar(@Model.Id)" class="btn btn-primary">Deletar</a>
+            <a asp-action="Index" class="btn btn-primary float-right">Voltar a página anterior</a>
+        </div>
+    </form>
+</div>
+
+@if (Model.Grupos.Count > 0)
+{
+    <section class="content" style="margin:16px;">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Deletar um Grupo que pertence ao Menu <b>"@Html.DisplayFor(model => model.Descricao)"</b></h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="tabela-editar"  name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Grupos)
+                                {
+                                    <form asp-action="DeletarGrupos">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="Id" />
+                                        <tr>
+                                            <td class="table-filter-item">@item.Descricao</td>
+                                            <td class="text-right py-0 align-middle">
+                                                <input type="hidden" asp-for="IdGrupo" value="@item.Id" />
+                                                <button type="submit" class="btn btn-primary"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+     <section class="content" style="margin:16px;">
+        <div class="callout callout-danger">
+            <h5>Grupos desse Menu</h5>
+
+            <p>O Menu <b>"@Html.DisplayFor(model => model.Descricao)"</b> não possui nenhum Grupo associado</p>
+        </div>
+    </section>
+}
+
+@section Scripts {
+    <script>
+        function deletar(id) {
+            Swal.fire({
+                title: 'Deseja excluir esse cadastro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Cancelar'
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("DeleteConfirmed", "Menu")/' + id;
+                    }
+                })
+        }
+    </script>
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableSearchInput = document.getElementById('tabela-editar');
+        var tableFilterItems = document.getElementsByClassName('table-filter-item');
+
+        tableSearchInput.addEventListener('input', function () {
+            var searchText = tableSearchInput.value.toLowerCase();
+
+            Array.prototype.forEach.call(tableFilterItems, function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var row = item.parentNode;
+                row.style.display = itemText.includes(searchText) ? '' : 'none';
+            });
+        });
+    });
+</script>

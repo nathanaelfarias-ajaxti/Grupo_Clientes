@@ -1,0 +1,234 @@
+﻿@model GrupoClientes.ViewsModel.GrupoViewModel
+
+<!--CABEÇALHO-->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Deletar</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                    <li class="breadcrumb-item active">Deletar</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content" style="margin:16px;">
+    <div class="card card-navy">
+        <div class="card-header">
+            <h3 class="card-title">Grupo</h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.DisplayFor(model => model.Descricao)</td>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="content" style="margin:16px;">
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <div>
+            <a onclick="deletar(@Model.Id)" class="btn btn-primary">Deletar</a>
+            <a asp-action="Index" class="btn btn-primary float-right">Voltar a página anterior</a>
+        </div>
+    </form>
+</div>
+
+<section class="content" style="margin:16px;">
+    <div class="row">
+        @if (Model.Menus.Count > 0)
+        {
+            <div class="col-6">
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Deletar um Menu do Grupo <b>"@Html.DisplayFor(model => model.Descricao)"</b></h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="tabela1" name="table_search" class="form-control float-right" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Url</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Menus)
+                                {
+                                    <form asp-action="DeletarMenus">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="Id" />
+                                    <tr>
+                                        <td class="table-filter1">@item.Descricao</td>
+                                        <td>@item.Url</td>
+                                        <td class="text-right py-0 align-middle">
+                                            <input type="hidden" asp-for="IdMenu" value="@item.Id" />
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-6">
+                <div class="callout callout-danger">
+                    <h5>Menus desse Grupo</h5>
+
+                    <p>O Grupo <b>"@Html.DisplayFor(model => model.Descricao)"</b> não possui nenhum Menu associado</p>
+                </div>
+            </div>
+        }
+        @if (Model.Usuarios.Count > 0)
+        {
+            <div class="col-6">
+                <div class="card card-navy">
+                    <div class="card-header">
+                        <h3 class="card-title">Deletar um Usuario do Grupo <b>"@Html.DisplayFor(model => model.Descricao)"</b></h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" id="tabela2" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Usuarios)
+                                {
+                                    <form asp-action="DeletarUsuarios">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" asp-for="Id" />
+                                    <tr>
+                                        <td class="table-filter2">@item.Nome</td>
+                                        <td>@item.Email</td>
+                                        <td class="text-right py-0 align-middle">
+                                            <input type="hidden" asp-for="IdUsuario" value="@item.Id" />
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    </form>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="col-6">
+                <div class="callout callout-danger">
+                    <h5>Usuários desse Grupo</h5>
+
+                    <p>O Grupo <b>"@Html.DisplayFor(model => model.Descricao)"</b> não possui nenhum Usuário associado</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        function deletar(id) {
+            Swal.fire({
+                title: 'Deseja excluir esse cadastro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Cancelar'
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '@Url.Action("DeleteConfirmed", "Grupo")/' + id;
+                    }
+                })
+        }
+    </script>
+}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableSearchInput = document.getElementById('tabela1');
+        var tableFilterItems = document.getElementsByClassName('table-filter1');
+
+        tableSearchInput.addEventListener('input', function () {
+            var searchText = tableSearchInput.value.toLowerCase();
+
+            Array.prototype.forEach.call(tableFilterItems, function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var row = item.parentNode;
+                row.style.display = itemText.includes(searchText) ? '' : 'none';
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tableSearchInput = document.getElementById('tabela2');
+        var tableFilterItems = document.getElementsByClassName('table-filter2');
+
+        tableSearchInput.addEventListener('input', function () {
+            var searchText = tableSearchInput.value.toLowerCase();
+
+            Array.prototype.forEach.call(tableFilterItems, function (item) {
+                var itemText = item.textContent.toLowerCase();
+                var row = item.parentNode;
+                row.style.display = itemText.includes(searchText) ? '' : 'none';
+            });
+        });
+    });
+</script>
+
+
+
