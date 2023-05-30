@@ -16,9 +16,7 @@ namespace GrupoClientes.Controllers
     public class MenuController : Controller
     {
         private readonly Contexto _context;
-          
-
-
+         
         public MenuController(Contexto context)
         {
             _context = context;
