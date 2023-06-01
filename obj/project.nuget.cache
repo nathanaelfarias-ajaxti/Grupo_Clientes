@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kZvhU4Dw7PnGMH1lhdJLxoi3n5G09J7NqrOwXQvXq3xjzRg1NkdmBgA4wwHRwKrXVHVSMG8T073s8daGzTqO6Q==",
+  "dgSpecHash": "K7iBMIFlG7CjDlNbwJUX4f72bMOCDOTu4d71EC8MCDCuY0PpSVbF9Hjb2DgEmIzCqbebJjkveALK84I1fECcSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\GrupoClientes.csproj",
+  "projectFilePath": "C:\\Projetos\\Aula\\Grupo_Clientes\\GrupoClientes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nathanael.farias\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\nathanael.farias\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

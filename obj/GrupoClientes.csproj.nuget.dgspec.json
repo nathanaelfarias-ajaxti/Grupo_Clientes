@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\GrupoClientes.csproj": {}
+    "C:\\Projetos\\Aula\\Grupo_Clientes\\GrupoClientes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\GrupoClientes.csproj": {
+    "C:\\Projetos\\Aula\\Grupo_Clientes\\GrupoClientes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\GrupoClientes.csproj",
+        "projectUniqueName": "C:\\Projetos\\Aula\\Grupo_Clientes\\GrupoClientes.csproj",
         "projectName": "GrupoClientes",
-        "projectPath": "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\GrupoClientes.csproj",
+        "projectPath": "C:\\Projetos\\Aula\\Grupo_Clientes\\GrupoClientes.csproj",
         "packagesPath": "C:\\Users\\nathanael.farias\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nathanael.farias\\source\\repos\\GrupoClientes\\obj\\",
+        "outputPath": "C:\\Projetos\\Aula\\Grupo_Clientes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
