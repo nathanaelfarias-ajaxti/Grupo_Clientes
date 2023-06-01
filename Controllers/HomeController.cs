@@ -18,7 +18,18 @@ namespace GrupoClientes.Controllers
         }
         public async Task<IActionResult> Index(string nome, string senha)
         {
-            
+            int numeroUsuarios = _context.Usuario.Count();
+            ViewBag.NumeroUsuarios = numeroUsuarios;
+
+            int numeroGrupos = _context.Grupo.Count();
+            ViewBag.NumeroGrupos = numeroGrupos;
+
+            int numeroMenus = _context.Menu.Count();
+            ViewBag.NumeroMenus = numeroMenus;
+
+            int numeroTotal = numeroGrupos + numeroMenus + numeroUsuarios;
+            ViewBag.NumeroTotal = numeroTotal;
+
             if (String.IsNullOrEmpty(nome) || String.IsNullOrEmpty(senha))
             {
                 ViewBag.Erro = "Por favor, informe o nome e a senha";
